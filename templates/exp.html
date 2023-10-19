@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+<body>
+    <h1>Экспоненциальное</h1>
+    <a href="/"><button>Назад</button></a>
+    <form method="POST">
+        <label for="lambda">Лямбда:</label>
+        <input type="text" id="lambda" name="lambda">
+        <button type="submit">Создать</button>
+    </form>
+    {% if graph %}
+    <img src="{{ graph }}" alt="Generated graph">
+    {% endif %}
+</body>
+</html>

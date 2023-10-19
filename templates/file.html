@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+<body>
+    <h1>Выборка из файла</h1>
+    <a href="/"><button>Назад</button></a>
+    <form method="POST" enctype="multipart/form-data">
+        <label for="listn">Имя листа:</label>
+        <input type="text" placeholder="н.п. Лист1" id="listn" name="listn">
+        <label for="coln">Столбец:</label>
+        <input type="text" placeholder="столбец A - нулевой" id="coln" name="coln">
+        <input type="file" placeholder="Ваш Excel файл" name="file">
+        <button type="submit">Создать</button>
+    </form>
+    {% if graph %}
+    <img src="{{ graph }}" alt="Generated graph">
+    {% endif %}
+</body>
+</html>
