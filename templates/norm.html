@@ -5,13 +5,15 @@
     </head>
 <body>
     <h1>Нормальное распределение</h1>
-    <a href="/"><button>Назад</button></a>
     <form method="POST">
         <label for="mean">Среднее:</label>
         <input type="text" id="mean" name="mean">
         <label for="std">Отклонение:</label>
         <input type="text" id="std" name="std">
-        <button type="submit">Создать</button>
+        <div class="button-row">
+            <a href="/"><button type="button" class="back-button">Назад</button></a>
+            <button type="submit" class="submit-button">Создать</button>
+        </div>
     </form>
     {% if graph %}
     <img src="{{ graph }}" alt="Generated graph">

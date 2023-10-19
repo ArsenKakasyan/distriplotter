@@ -5,14 +5,16 @@
     </head>
 <body>
     <h1>Выборка из файла</h1>
-    <a href="/"><button>Назад</button></a>
     <form method="POST" enctype="multipart/form-data">
         <label for="listn">Имя листа:</label>
         <input type="text" placeholder="н.п. Лист1" id="listn" name="listn">
         <label for="coln">Столбец:</label>
         <input type="text" placeholder="столбец A - нулевой" id="coln" name="coln">
         <input type="file" placeholder="Ваш Excel файл" name="file">
-        <button type="submit">Создать</button>
+        <div class="button-row">
+            <a href="/"><button type="button" class="back-button">Назад</button></a>
+            <button type="submit" class="submit-button">Создать</button>
+        </div>
     </form>
     {% if graph %}
     <img src="{{ graph }}" alt="Generated graph">

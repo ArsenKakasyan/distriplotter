@@ -4,11 +4,13 @@
     </head>
 <body>
     <h1>Экспоненциальное</h1>
-    <a href="/"><button>Назад</button></a>
     <form method="POST">
         <label for="lambda">Лямбда:</label>
         <input type="text" id="lambda" name="lambda">
-        <button type="submit">Создать</button>
+        <div class="button-row">
+            <a href="/"><button type="button" class="back-button">Назад</button></a>
+            <button type="submit" class="submit-button">Создать</button>
+        </div>
     </form>
     {% if graph %}
     <img src="{{ graph }}" alt="Generated graph">
