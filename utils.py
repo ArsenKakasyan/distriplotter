@@ -20,6 +20,7 @@ class GraphGenerator:
         dist_type = 'norm'
         data = [self.generate_random_number(mean, std) for _ in range(100)]
         x = np.array(data)
+        x = np.sort(x)
         y = (1 / (std * np.sqrt(2 * np.pi))) * np.exp(-0.5 * ((x - mean) / std) ** 2)
         return self.plot_graph(x, y, dist_type)
     
@@ -36,6 +37,7 @@ class GraphGenerator:
         x = np.array(column_c_values)
         mean = x.mean()
         std = x.std()
+        x = np.sort(x)
         y = (1 / (std * np.sqrt(2 * np.pi))) * np.exp(-0.5 * ((x - mean) / std) ** 2)
         return self.plot_graph(x, y, dist_type)
     
