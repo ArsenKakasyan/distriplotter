@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+from scipy.stats import gaussian_kde
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
@@ -9,19 +10,16 @@ import base64
 class GraphGenerator:
     def __init__(self):
         self.df = None
-    
-    def generate_random_number(self, mean, std_dev):
-        u1 = np.random.uniform()
-        u2 = np.random.uniform()
-        z = np.sqrt(-2 * np.log(u1)) * np.cos(2 * np.pi * u2)
-        return mean + std_dev * z
 
     def drawNormDistr(self, mean, std):
         dist_type = 'norm'
-        data = [self.generate_random_number(mean, std) for _ in range(100)]
+        #https://numpy.org/doc/stable/reference/random/generated/numpy.random.normal.html
+        data = np.random.normal(mean, std, 1000)
         x = np.array(data)
         x = np.sort(x)
-        y = (1 / (std * np.sqrt(2 * np.pi))) * np.exp(-0.5 * ((x - mean) / std) ** 2)
+        #https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.gaussian_kde.html#scipy.stats.gaussian_kde
+        kde = gaussian_kde(x)
+        y = kde.pdf(x)
         return self.plot_graph(x, y, dist_type)
     
     def drawExpDistr(self, lmbda):
@@ -35,10 +33,9 @@ class GraphGenerator:
         self.df = pd.read_excel(excel_file, sheet_name=listn)
         column_c_values = self.df.iloc[:, coln].values
         x = np.array(column_c_values)
-        mean = x.mean()
-        std = x.std()
         x = np.sort(x)
-        y = (1 / (std * np.sqrt(2 * np.pi))) * np.exp(-0.5 * ((x - mean) / std) ** 2)
+        kde = gaussian_kde(x)
+        y = kde.pdf(x)
         return self.plot_graph(x, y, dist_type)
     
     def plot_graph(self, x, y, dist_type):
@@ -51,6 +48,7 @@ class GraphGenerator:
             plt.axvline(x.min(), color='r', linestyle='dashed', linewidth=2)  
             plt.axvline(x.max(), color='g', linestyle='dashed', linewidth=2)  
             plt.axvline(x.mean(), color='k', linestyle='dashed', linewidth=2)
+            plt.legend()
             
         img = io.BytesIO()
         plt.savefig(img, format='png')
